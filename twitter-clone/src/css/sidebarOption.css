@@ -1,0 +1,27 @@
+.sidebarOption{
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+.sidebarOption:hover{
+    background-color: var(--twitter-background);
+    border-radius: 20px;
+    color:var(--twitter-color); 
+    transition: color 100ms ease-out;   
+    
+}
+
+/* The space around the icon. The .Mui class is added by MateiralUI(Can be found whgile Inspecting) */
+.sidebarOption > .MuiSvgIcon-root{
+    padding: 20px;
+}
+
+.sidebarOption > h2{
+    font-weight: 800;
+    font-size: 20px;
+    margin-right: 20px;
+}
+
+.sidebarOption--active{
+    color: var(--twitter-color);
+}
