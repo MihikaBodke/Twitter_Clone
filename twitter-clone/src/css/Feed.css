@@ -6,8 +6,16 @@
     overflow-y: scroll; 
     }
 
-
-
+/* To remove the scroll bar */
+/* Chrome Opera and Safari */
+.feed::-webkit-scrollbar{
+    display: none;
+}
+.feed{
+    /* IE and Edge */
+    -ms-overflow-style: none; 
+    scrollbar-width: none; /*Firefox*/
+}
     .feed--header{
 
         position: sticky;
