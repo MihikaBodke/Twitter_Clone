@@ -3,7 +3,7 @@ from django.http import JsonResponse
 
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .serializers import PostSerializer, UserSerializer, PostCommentSerializer
+from .serializers import PostSerializer, UserSerializer, PostCommentSerializer, FollowSerializer
 
 from .models import Posts, User, PostComments, Follow
 # Create your views here.
@@ -110,7 +110,7 @@ def postInsert(request):
 
 @ api_view(['GET'])
 def recommendUsers(request, username):
-    users = Follow.objects.all().filter(follower=1)
+    users = Follow.objects.all().filter(follower=username)
     print(users)
     list1=[]
     for i in users:
@@ -123,5 +123,20 @@ def recommendUsers(request, username):
     if(len(usersToFollow)<n):
         n = len(usersToFollow)
     serializer = UserSerializer(usersToFollow[:n], many=True)
+
+    return Response(serializer.data)
+
+
+
+from django.views.decorators.csrf import csrf_exempt
+
+@ api_view(['POST'])
+def userFollow(request):
+    serializer = FollowSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+    else:
+        print("SERIALIZER VALID:",serializer.is_valid())
+        print("SERIA",serializer.errors)
 
     return Response(serializer.data)

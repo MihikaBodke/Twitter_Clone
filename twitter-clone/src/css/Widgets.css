@@ -1,3 +1,17 @@
 .Widgets{
     flex:0.3;
+
+    min-width: fit-content;
+    overflow-y: scroll; 
+  }
+  
+/* To remove the scroll bar */
+/* Chrome Opera and Safari */
+.Widgets::-webkit-scrollbar{
+    display: none;
+}
+.Widgets{
+    /* IE and Edge */
+    -ms-overflow-style: none; 
+    scrollbar-width: none; /*Firefox*/
 }

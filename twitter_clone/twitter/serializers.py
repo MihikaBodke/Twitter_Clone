@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from twitter.models import Posts, User, PostComments
+from twitter.models import Posts, User, PostComments, Follow
 
 class PostSerializer(serializers.ModelSerializer):
     class Meta:
@@ -18,4 +18,10 @@ class UserSerializer(serializers.ModelSerializer):
 class PostCommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = PostComments
+        fields = '__all__'
+
+
+class FollowSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Follow
         fields = '__all__'

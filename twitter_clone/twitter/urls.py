@@ -16,6 +16,7 @@ urlpatterns = [
     path('post-insert/',
          views.postInsert, name="post-insert"),
     path('user-register/', views.userRegistration, name="user-registration"),
+    path('user-follow/', views.userFollow, name="user-follow"),
 
     # path('subject-update/user=<str:user>/subject_id=<int:id>',
     #      views.subjectUpdate, name="subject-update"),

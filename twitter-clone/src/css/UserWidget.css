@@ -1,0 +1,78 @@
+
+  
+.widget {
+    /* display: flex; */
+    align-items: flex-start;
+    border-bottom: 1px solid var(--twitter-background);
+    border-right: 1px solid var(--twitter-background);
+}
+  
+  .widget--body {
+    flex: 1;
+    padding: 10px;
+  }
+  
+  .widget--body > img {
+    border-radius: 20px;
+    margin-left: 100px;
+    margin-right: auto;
+    
+  }
+  
+
+  
+  .widget--headerDescription {
+    
+    font-size: 15px;
+  }
+  .avatar{
+    size: 5px;
+    /* padding-bottom: 100px; */
+    display: flex;
+  }
+  .widget--headerText{
+    top: 10px;
+  }
+  .widget--header{
+    
+      margin-left:auto;
+  align-items: center;
+  
+  
+  }
+  .widget--headerText > h3 {
+  margin-left:20px;
+    margin-top:-25px;  
+    font-size: 15px;
+  }
+  
+  .widget--badge {
+    font-size: 14px !important;
+    color: var(--twitter-color);
+  }
+  
+  .widget--headerSpecial {
+    font-weight: 600;
+    font-size: 12px;
+    color: gray;
+  }
+  
+  .widget--avatar {
+    padding: 20px;
+  }
+  
+.userWidget--followButton{
+    color: var(--twitter-color) !important;
+    /* important kyu? matrial Ui ne css likha hai button ka already but hume yueh changes chahiye]
+    compulsory so yeh important use karengfe to yeh changes aayenge for sure, as we are overriding the css
+    of material ui, we use important */
+    border: 1px solid  var(--twitter-color)  !important;
+    background: white !important;
+    font-weight: 900 !important;
+    text-transform: inherit !important;
+    border-radius: 30px !important;
+    height: 20px !important;
+    margin-left: 35% !important;
+    margin-right: auto !important;
+
+}

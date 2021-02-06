@@ -27,7 +27,9 @@ class App extends Component {
    verified:false,  
     },
     posts:[ ],
+    recommendToFollow:[],
   };
+  
   handleLogin = (username, password)=>
   {
     // console.log(username, password);
@@ -59,7 +61,8 @@ let url = `http://127.0.0.1:8000/user-login/username=${username}/password=${pass
     
     .then((data) => 
     this.setState({ user: data, loggedIn:true },
-    ()=>{this.fetchPosts(this.state.user.username)}
+    ()=>{this.fetchPosts(this.state.user.username);
+    this.recommendUsers()}
 
     )
 
@@ -84,8 +87,9 @@ fetchPosts=(username=this.state.user.username)=>{
     .then((response) => response.json())
     .then((data) => 
     this.setState({ posts: data },
+      
       ()=>{
-        console.log(this.state.posts);
+        this.recommendUsers();
       }
       )
     )
@@ -115,10 +119,12 @@ fetchPosts=(username=this.state.user.username)=>{
       // }
     })
         .then(res => {
-          console.log(res.data);
-          this.setState({loggedIn:true});
-          this.setState({username:username});
+      this.setState({ user: res.data, loggedIn:true });
 
+          console.log(res.data);
+          // this.setState({loggedIn:true});
+          // this.setState({username:username});
+          this.recommendUsers();
 
         })
         .catch(err => console.log(err))
@@ -128,7 +134,55 @@ fetchPosts=(username=this.state.user.username)=>{
 
 
 
-
+      recommendUsers=()=>{
+        const username = this.state.user.username;
+      
+        let url = `http://127.0.0.1:8000/user-recommend/username=${username}/`;
+        // console.log(url+"now");
+      
+          fetch(url, {
+            mode:'cors',
+            method: "get",
+          })
+          .then((response) => response.json())
+          .then((data) =>
+          // console.log(data),
+          // console.log("DATA"), 
+          this.setState({ recommendToFollow: data },
+            ()=>{
+              // console.log(this.state.posts);
+            }
+            // )
+          )
+          )}
+          handleFollowing=(following)=>{
+            const follower=this.state.user.username;
+            let uploadData = new FormData();
+            uploadData.append("follower"  , follower);
+              uploadData.append("following",following);
+            console.log("USERNAME"+follower+"following:",following)
+            let url = `http://127.0.0.1:8000/user-follow/`;
+              fetch(url, {
+                mode:'cors',
+                method: "post",
+                body: uploadData
+              })
+              .then((response) => response.json(),
+              
+              )
+              
+              
+              .then((data) => 
+              this.setState({ post: data, loggedIn:true },
+              ()=>{
+                this.fetchPosts(this.state.user.username);
+            }
+          
+              )
+          
+              )
+              
+          }
 handleTweeting=(text, image)=>{
         console.log(text, image, this.state.user.username);
         let url = `http://127.0.0.1:8000/post-insert/ `;
@@ -187,7 +241,7 @@ handleTweeting=(text, image)=>{
     // // )
 
     // // )
-    
+  
 
       }
   render(){
@@ -221,7 +275,10 @@ this.state.loggedIn
         // user= {this.state.username}
       />}
 
-      {this.state.loggedIn && <Widgets/>}
+      {this.state.loggedIn && <Widgets
+        recommendToFollow= {this.state.recommendToFollow}
+        onFollowing={this.handleFollowing}
+        />}
 
 
 

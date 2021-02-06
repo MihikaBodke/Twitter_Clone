@@ -14,8 +14,7 @@ import { Avatar, Button} from "@material-ui/core";
     }
     getAvatarSource=()=>{
          
-        let src="D:/Notes/Web Development/ReactJs/twitter/twitter_clone"+(this.props.user.avatar);
-        console.log(src);
+        let src=(this.props.user.avatar);
         return src;
     }
     getText=()=>{
@@ -71,9 +70,9 @@ import { Avatar, Button} from "@material-ui/core";
 
 
             {/* {console.log(this.refs.postText.defaultValue )} */}
-                <Button className="tweetBox--tweetButton" onClick={()=>this.props.onTweeting(this.state.postText, this.state.postImage)
-                    // this.setState({clicked:true})
-                }>Tweet</Button>
+            <Button className="tweetBox--tweetButton" onClick={()=>this.props.onTweeting(this.state.postText, this.state.postImage)
+            
+}>Tweet</Button>
             </form>
         </div>
     )
