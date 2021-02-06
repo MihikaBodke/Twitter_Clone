@@ -17,7 +17,7 @@ export default class Login extends Component {
     render(){
       return (
         <div>
-          Login
+          
             {/* {console.log(this)} */}
             <div className="container">
       <div className="row">

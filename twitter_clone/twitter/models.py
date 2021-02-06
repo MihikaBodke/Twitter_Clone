@@ -7,29 +7,32 @@ class User(models.Model):
     password = models.CharField(max_length=20)
     displayName = models.CharField(max_length=50, unique = False)
     verified = models.BooleanField(default=False)
-    avatar = models.ImageField(upload_to='imgs')
+    avatar = models.CharField(max_length=50000)   
     followers = models.IntegerField(default=0)
     following = models.IntegerField(default=0)
 
 def getDatetime():
 
     return   datetime.datetime.now()
+
+from django.utils import timezone
+    
 class Posts(models.Model):
     postID = models.AutoField(primary_key=True,unique=True)
     username = models.ForeignKey('twitter.User', on_delete=models.CASCADE)
-    postImage = models.FileField(blank=True)
+    postImage = models.CharField(max_length=50000, blank=True, null=True)
     postLikes = models.IntegerField()
     # commentText = models.ForeignKey('twitter.PostComments', on_delete=models.CASCADE)
-    postTimestamp = models.DateTimeField(default=getDatetime(), null=True)
-    postText = models.CharField(max_length = 500)
+    postTimestamp = models.DateTimeField(default=timezone.now, null=True)
+    postText = models.CharField(max_length = 50000)
     displayName = models.CharField(max_length=100,blank=True)
     verified = models.BooleanField(blank=True)
-    avatar = models.ImageField(upload_to="imgs",null=True,blank=True)
+    avatar = models.CharField(max_length=50000)
     def getPosts(username):
         
         from .models import Posts, Follow
         username=[username]
-        print(username)
+        # print(username)
         usernameOfFollowing = Follow.objects.all().filter(follower=username[0])
         for i in usernameOfFollowing:
             username.append(i.following)
@@ -40,9 +43,9 @@ class Posts(models.Model):
             posts[i].displayName=posts[i].username.displayName
             posts[i].avatar=posts[i].username.avatar
             posts[i].verified=posts[i].username.verified
-            posts[i].postTimestamp=posts[i].postTimestamp.strftime("%d/%m/%Y %H:%M:%S")   
+            posts[i].postTimestamp=posts[i].postTimestamp.strftime("%B %d, %H:%M")   
 
-            print(posts[i].verified)
+            # print(posts[i].verified)
 
         # print(username)
         # for i in posts:

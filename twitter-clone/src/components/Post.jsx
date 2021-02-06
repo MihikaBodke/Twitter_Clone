@@ -12,12 +12,13 @@ class Post extends Component {
     return (
         <div className="post">
         <div className="post--avatar">
-            <Avatar src=""/>
             <div className="post--body">
                 
+                
                 <div className="post--header">
-                    
+                <Avatar src={this.props.post.avatar}/>    
                     <div className="post--headerText">   
+                
                         <h3>
                             {this.props.post.displayName}
 
@@ -33,12 +34,15 @@ class Post extends Component {
                         <p>{(this.props.post.postText)}</p>
                     </div>                
                 </div>
-                <img src={this.props.postImage}/>
+                <img src={this.props.post.postImage}/>
+                {/* <img src={this.props.postImage}></img> */}
                   <div className="post--footer">
                     <ChatBubbleOutlineIcon fontSize="small" />
                     <RepeatIcon fontSize="small"/>
+                    <div>
                     <FavoriteBorderIcon fontSize="small"/>
                     {this.props.post.postLikes}
+                    </div>
                     <PublishIcon fontSize="small"/>
                     {this.props.post.postTimestamp}
                     

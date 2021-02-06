@@ -99,7 +99,7 @@ fetchPosts=(username=this.state.user.username)=>{
 
 
 // var base64= btoa(uint8ToString(avatar));
-  uploadData.append("avatar"  , avatar, avatar.name);
+  uploadData.append("avatar"  , avatar);
     uploadData.append("username",username);
     uploadData.append("displayName",featureName);
     uploadData.append("password",password);
@@ -140,13 +140,13 @@ handleTweeting=(text, image)=>{
       //  uploadData.append("postID",id);
 
        uploadData.append("username",this.state.user.username);
-      //  uploadData.append("postImage",image);
+       uploadData.append("postImage",image);
       //  uploadData.append("postTimestamp",Date.now());
        uploadData.append("postText"  , text);
            uploadData.append("postLikes",0);
            uploadData.append("displayName",this.state.user.displayName);
            uploadData.append("verified",this.state.user.verified);
-          //  uploadData.append("avatar",this.state.user.avatar, this.state.avatar) ;
+           uploadData.append("avatar",this.state.user.avatar) ;
 
           
            axios.post(url, uploadData, {

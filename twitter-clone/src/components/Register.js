@@ -9,14 +9,14 @@ export default class Register extends Component {
   }
   handleImageChange = (e) => {
     this.setState({
-      image: e.target.files[0]
+      // image: e.target.files[0]
     })
   };
 
     render(){
       return (
         <div>
-            Register
+            
             <div className="container">
       <div className="row">
         <div className="col-md-3"></div>
@@ -38,7 +38,7 @@ export default class Register extends Component {
             </div>
             <div className="mb-3 bg-color">
               <label>Avatar</label>
-              <input type="file" name="avatar" ref="avatar" className="form-control" required  onChange={this.handleImageChange}/>
+            <input type="text" name="avatar" ref="avatar" className="form-control" required  onChange={this.handleImageChange}/>
             </div>
             
             <button type="button" className="btn btn-custom btn-lg btn-block mt-3" onClick={()=>this.props.onRegister(this.refs.username.value,this.refs.displayName.value ,this.refs.password.value,this.state.image)}>Register</button>

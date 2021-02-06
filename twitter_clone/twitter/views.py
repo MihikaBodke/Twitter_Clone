@@ -88,6 +88,7 @@ from django.db.models import Max
 @ api_view(['POST'])
 def postInsert(request):
     serializer = PostSerializer(data=request.data)
+    print("INSERTING..")
     # print(Posts.objects.all().aggregate(Max('postID'))),
     
     newSerializer = {
@@ -96,14 +97,31 @@ def postInsert(request):
     }
     if serializer.is_valid():
         # newSerializer.update(serializer)
-        # print(newSerializer)
+        print(newSerializer)
         serializer.save()
 
     else:
-        print("SERIALIZER VALID:",serializer.is_valid())
+        print("SERIALIZER VALID:",serializer.is_valid())        
         print("SERIA",serializer.errors)
         # posts = Posts.getPosts(username)
         # serializer = PostSerializer(posts, many=True)
     return Response(serializer.data)
 
 
+@ api_view(['GET'])
+def recommendUsers(request, username):
+    users = Follow.objects.all().filter(follower=1)
+    print(users)
+    list1=[]
+    for i in users:
+        list1.append(i.following.username)
+    print("Follow")
+    usersToFollow = User.objects.all().exclude(username__in=list1)
+    for i in usersToFollow:
+        print(i.username)
+        n=5
+    if(len(usersToFollow)<n):
+        n = len(usersToFollow)
+    serializer = UserSerializer(usersToFollow[:n], many=True)
+
+    return Response(serializer.data)
