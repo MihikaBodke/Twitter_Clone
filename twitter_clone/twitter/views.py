@@ -76,9 +76,9 @@ def postList(request, username):
 #  or username = usernameOfFollowing
     # posts = Posts.objects.all().filter(username=username)
     posts = Posts.getPosts(username)
-    print("username3:",username,"Posts are:")
-    for i in posts:
-        print(i.postText)
+    # print("username3:",username,"Posts are:")
+    # for i in posts:
+    #     print(i.postText)
     serializer = PostSerializer(posts, many=True)
     # print(serializer.data)
     return Response(serializer.data)
@@ -110,11 +110,13 @@ def postInsert(request):
 
 @ api_view(['GET'])
 def recommendUsers(request, username):
+    print("Username=",username)
     users = Follow.objects.all().filter(follower=username)
-    print(users)
+    print(username,users)
     list1=[]
     for i in users:
         list1.append(i.following.username)
+    list1.append(username)
     print("Follow")
     usersToFollow = User.objects.all().exclude(username__in=list1)
     for i in usersToFollow:

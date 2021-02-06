@@ -84,16 +84,16 @@ fetchPosts=(username=this.state.user.username)=>{
       mode:'cors',
       method: "get",
     })
-    .then((response) => response.json())
+    
+    .then((response) => response.json(), )
     .then((data) => 
-    this.setState({ posts: data },
+    this.setState({ posts: data },()=>{this.recommendUsers();
+    }      
       
-      ()=>{
-        this.recommendUsers();
-      }
+     
       )
     )
-
+    
 }
 
 
