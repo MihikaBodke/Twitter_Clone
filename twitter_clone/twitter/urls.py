@@ -8,7 +8,7 @@ urlpatterns = [
     path('post-list/username=<str:username>/',
          views.postList, name="post-list"),
 
-    path('user-recommend/<str:username>/', views.recommendUsers, name="recommendUsers"),
+    path('user-recommend/user name=<str:username>/', views.recommendUsers, name="recommendUsers"),
     path('user-login/username=<str:username>/password=<str:password>/',         # >/password=<str:password>'
          views.userLogin, name="user-login"),
 
